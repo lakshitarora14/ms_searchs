@@ -2,6 +2,7 @@ package com.coviam.search.config;
 
 
         import org.apache.solr.client.solrj.SolrClient;
+        import org.apache.solr.client.solrj.impl.CloudSolrClient;
         import org.apache.solr.client.solrj.impl.HttpSolrClient;
         import org.springframework.beans.factory.annotation.Value;
         import org.springframework.context.annotation.Bean;
@@ -10,15 +11,17 @@ package com.coviam.search.config;
         import org.springframework.data.solr.core.SolrTemplate;
         import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 
+        import java.util.Collections;
+
 @Configuration
-@EnableSolrRepositories(basePackages = "com.coviam.cart.repository")
+@EnableSolrRepositories(basePackages = "com.coviam.search.repository")
 @ComponentScan
 public class SolrConfig {
 
-    @Value("spring.data.solr.host") String solrURL;
+    @Value("${spring.data.solr.host}") String solrURL;
     @Bean
-    public SolrClient solrClient() {
-        return new HttpSolrClient.Builder(solrURL).build();
+    public CloudSolrClient solrClient() {
+        return new CloudSolrClient.Builder(Collections.singletonList(solrURL)).build();
     }
     @Bean
     public SolrTemplate solrTemplate(SolrClient client) throws Exception {
