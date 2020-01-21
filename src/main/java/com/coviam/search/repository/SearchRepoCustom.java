@@ -5,4 +5,5 @@ import org.springframework.data.domain.Page;
 
 public interface SearchRepoCustom {
     public Page<SearchDocument> search(String keyword);
+
 }

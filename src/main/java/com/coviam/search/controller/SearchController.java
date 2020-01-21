@@ -21,8 +21,11 @@ public class SearchController {
         return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
     }
 
-    @GetMapping("search")
+    @GetMapping("/search")
     public ResponseEntity<Page<SearchDocument>> search(@RequestParam("keyword")String keyword) {
         return new ResponseEntity<>(searchService.search(keyword), HttpStatus.OK);
     }
+
+
+
 }

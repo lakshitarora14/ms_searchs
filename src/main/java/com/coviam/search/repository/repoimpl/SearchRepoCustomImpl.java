@@ -19,8 +19,15 @@ public class SearchRepoCustomImpl implements SearchRepoCustom {
 
     @Override
     public Page<SearchDocument> search(String keyword) {
-        Query query = new SimpleQuery(Criteria.where("productName").is(keyword));
+        Query query = new SimpleQuery(Criteria.where("productName").contains(keyword));
+//        Query query = new SimpleQuery(Criteria.where("productName").is(keyword));
+
 //        query.addFilterQuery(new SimpleFilterQuery(Criteria.where("productName").contains(keyword)));
         return solrTemplate.query("productCollection", query, SearchDocument.class);
     }
+
+
+
+
+
 }

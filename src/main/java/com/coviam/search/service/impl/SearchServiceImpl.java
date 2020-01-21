@@ -25,4 +25,5 @@ public class SearchServiceImpl implements SearchService {
     public Page<SearchDocument> search(String keyword) {
         return searchRepoCustom.search(keyword);
     }
+
 }
