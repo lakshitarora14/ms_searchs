@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,13 +36,13 @@ public class SearchController {
         return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
     }
 
-//    @KafkaListener(topics = "kafkaAdd",groupId = "group_id",containerFactory = "userConsumerFactory")
-//    public ResponseEntity<SearchDocument> save(String merchantData) throws JsonProcessingException{
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        SearchDocument searchDocument = new SearchDocument();
-//        searchDocument = objectMapper.readValue(merchantData,SearchDocument.class);
-//        return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
-//    }
+    @KafkaListener(topics = "kafkaAdd",groupId = "group_id")
+    public ResponseEntity<SearchDocument> save(String merchantData) throws JsonProcessingException{
+        ObjectMapper objectMapper = new ObjectMapper();
+        SearchDocument searchDocument = new SearchDocument();
+        searchDocument = objectMapper.readValue(merchantData,SearchDocument.class);
+        return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
+    }
 
 
     @GetMapping("/search")
