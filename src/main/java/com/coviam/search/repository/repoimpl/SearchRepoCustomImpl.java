@@ -11,6 +11,10 @@ import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
+
+import static org.springframework.data.solr.core.query.Query.Operator.OR;
+
 @Repository
 public class SearchRepoCustomImpl implements SearchRepoCustom {
 
@@ -19,12 +23,25 @@ public class SearchRepoCustomImpl implements SearchRepoCustom {
 
     @Override
     public Page<SearchDocument> search(String keyword) {
-        Query query = new SimpleQuery(Criteria.where("productName").contains(keyword));
-//        Query query = new SimpleQuery(Criteria.where("productName").is(keyword));
+        String[] split = keyword.split("\\s+");
+        Query query = new SimpleQuery();
+        query.setRequestHandler("browse");
+        for (String keyword1 : Arrays.asList(split)) {
+            query.addCriteria(new Criteria("productName").boost(10).is(keyword)
+            .or(new Criteria("description").boost(5).is(keyword))
+                    .or(new Criteria("genre").boost(7).is(keyword))
+                    .or(new Criteria("author").boost(8).is(keyword)));
+
+        }
+        //OR.(Criteria.where("description").contains(keyword)));
+//        Query query1 = new SimpleQuery(Criteria.where("productId").is(keyword));
+
+//        Query query = new SimpleQuery(Criteria.where("productName").contains(keyword));
 
 //        query.addFilterQuery(new SimpleFilterQuery(Criteria.where("productName").contains(keyword)));
-        return solrTemplate.query("productCollection", query, SearchDocument.class);
+        return solrTemplate.query("productCollection",query, SearchDocument.class);
     }
+
 
 
 

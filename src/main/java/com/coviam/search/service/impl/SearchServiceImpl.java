@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SearchServiceImpl implements SearchService {
     @Autowired
@@ -26,4 +28,8 @@ public class SearchServiceImpl implements SearchService {
         return searchRepoCustom.search(keyword);
     }
 
+    @Override
+    public List<SearchDocument> findByString(String name) {
+        return searchRepository.findByString(name);
+    }
 }

@@ -1,17 +1,16 @@
 package com.coviam.search.config;
 
 
-        import org.apache.solr.client.solrj.SolrClient;
-        import org.apache.solr.client.solrj.impl.CloudSolrClient;
-        import org.apache.solr.client.solrj.impl.HttpSolrClient;
-        import org.springframework.beans.factory.annotation.Value;
-        import org.springframework.context.annotation.Bean;
-        import org.springframework.context.annotation.ComponentScan;
-        import org.springframework.context.annotation.Configuration;
-        import org.springframework.data.solr.core.SolrTemplate;
-        import org.springframework.data.solr.repository.config.EnableSolrRepositories;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 
-        import java.util.Collections;
+import java.util.Collections;
 
 @Configuration
 @EnableSolrRepositories(basePackages = "com.coviam.search.repository")
@@ -28,4 +27,8 @@ public class SolrConfig {
         return new SolrTemplate(client);
     }
 
-}
+
+
+
+
+    }
