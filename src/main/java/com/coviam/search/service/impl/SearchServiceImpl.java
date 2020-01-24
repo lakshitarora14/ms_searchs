@@ -24,7 +24,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public Page<SearchDocument> search(String keyword) {
+    public List<SearchDocument> search(String keyword) {
         return searchRepoCustom.search(keyword);
     }
 
@@ -33,11 +33,13 @@ public class SearchServiceImpl implements SearchService {
 //        return searchRepository.findByString(name);
 //    }
 
-
     @Override
-    public void deleteById(String id) {
-        searchRepository.deleteById(id);
+    public void deleteById(String productId) {
+        searchRepository.deleteByProductId(productId);
     }
+
+
+
 
 //    @Override
 //    public Page<SearchDocument> search2(String keyword) {

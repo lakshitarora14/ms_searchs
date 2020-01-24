@@ -45,12 +45,28 @@ public class SearchController {
     }
 
 
+//    @GetMapping("/search")
+//    public ResponseEntity<Page<SearchDocument>> search(@RequestParam("keyword")String keyword) {
+//
+//        return new ResponseEntity<>(searchService.search(keyword), HttpStatus.OK);
+//    }
     @GetMapping("/search")
-    public ResponseEntity<Page<SearchDocument>> search(@RequestParam("keyword")String keyword) {
+    public List<SearchDocument> search(@RequestParam("keyword")String keyword) {
 
-        return new ResponseEntity<>(searchService.search(keyword), HttpStatus.OK);
+        return searchService.search(keyword);
     }
 
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteById(@PathVariable String productId){
+         searchService.deleteById(productId);
+         return "Deleted";
+
+    }
+
+
+
+    //=========================
 //    @GetMapping("/search2")
 //    public ResponseEntity<Page<SearchDocument>> search2(@RequestParam("keyword")String keyword) {
 //

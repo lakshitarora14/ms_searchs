@@ -8,11 +8,10 @@ import java.util.List;
 public interface SearchService {
     SearchDocument save(SearchDocument searchDocument);
 
-    Page<SearchDocument> search(String keyword);
+    List<SearchDocument> search(String keyword);
 
 //    List<SearchDocument> findByString(String name);
 
-    void deleteById(String id);
+    void deleteById(String productId);
 
-//    Page<SearchDocument> search2(String keyword);
 }

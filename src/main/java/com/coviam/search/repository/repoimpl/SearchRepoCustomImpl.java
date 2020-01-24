@@ -3,16 +3,11 @@ package com.coviam.search.repository.repoimpl;
 import com.coviam.search.document.SearchDocument;
 import com.coviam.search.repository.SearchRepoCustom;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.SolrTemplate;
-import org.springframework.data.solr.core.query.Criteria;
-import org.springframework.data.solr.core.query.Query;
 import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
-
-import static org.springframework.data.solr.core.query.Query.Operator.OR;
+import java.util.List;
 
 @Repository
 public class SearchRepoCustomImpl implements SearchRepoCustom {
@@ -35,10 +30,12 @@ public class SearchRepoCustomImpl implements SearchRepoCustom {
 //        return solrTemplate.query("productCollection",query, SearchDocument.class);
 //    }
     @Override
-    public Page<SearchDocument> search(String keyword) {
+    public List<SearchDocument> search(String keyword) {
         SimpleQuery solrQuery = new SimpleQuery(keyword);
         solrQuery.setRequestHandler("/browse");
-       return solrTemplate.query("productCollection",solrQuery,SearchDocument.class);
+
+        List<SearchDocument> result = solrTemplate.query("productCollection",solrQuery,SearchDocument.class).getContent();
+        return result;
     }
 
 
