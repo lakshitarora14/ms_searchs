@@ -10,7 +10,9 @@ public interface SearchService {
 
     Page<SearchDocument> search(String keyword);
 
-    List<SearchDocument> findByString(String name);
+//    List<SearchDocument> findByString(String name);
 
     void deleteById(String id);
+
+//    Page<SearchDocument> search2(String keyword);
 }

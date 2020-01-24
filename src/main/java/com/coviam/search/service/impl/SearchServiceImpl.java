@@ -25,17 +25,22 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public Page<SearchDocument> search(String keyword) {
-        return searchRepoCustom.search2(keyword);
+        return searchRepoCustom.search(keyword);
     }
 
-    @Override
-    public List<SearchDocument> findByString(String name) {
-        return searchRepository.findByString(name);
-    }
+//    @Override
+//    public List<SearchDocument> findByString(String name) {
+//        return searchRepository.findByString(name);
+//    }
 
 
     @Override
     public void deleteById(String id) {
         searchRepository.deleteById(id);
     }
+
+//    @Override
+//    public Page<SearchDocument> search2(String keyword) {
+//        return searchRepoCustom.search2(keyword);
+//    }
 }

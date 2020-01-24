@@ -21,7 +21,6 @@ public class SearchDocument {
     private String genre;
     @Indexed(name = "rating", type = "String")
     private String rating;
-//    private HashMap<String,String> attributes;
     @Indexed(name = "description", type = "String")
     private String description;
     @Indexed(name = "author", type = "String")

@@ -26,4 +26,5 @@ public class SolrConfig {
     public SolrTemplate solrTemplate(SolrClient client) throws Exception {
         return new SolrTemplate(client);
     }
+
 }

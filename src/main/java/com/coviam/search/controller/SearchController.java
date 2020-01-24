@@ -51,13 +51,13 @@ public class SearchController {
         return new ResponseEntity<>(searchService.search(keyword), HttpStatus.OK);
     }
 
+//    @GetMapping("/search2")
+//    public ResponseEntity<Page<SearchDocument>> search2(@RequestParam("keyword")String keyword) {
+//
+//        return new ResponseEntity<>(searchService.search2(keyword), HttpStatus.OK);
+//    }
 
-    @GetMapping("/find/{name}")
-    public List<SearchDocument> find(@PathVariable(value = "name") String name)
-    {
-        return  searchService.findByString(name);
 
-    }
 
 //    @DeleteMapping("/delete/{id}")
 //    public  void deleteById(@PathVariable(value = "id") String id){

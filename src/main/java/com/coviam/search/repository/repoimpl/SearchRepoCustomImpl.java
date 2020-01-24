@@ -20,28 +20,22 @@ public class SearchRepoCustomImpl implements SearchRepoCustom {
     @Autowired
     private SolrTemplate solrTemplate;
 
+//    @Override
+//    public Page<SearchDocument> search2(String keyword) {
+//        String[] split = keyword.split("\\s+");
+//        Query query = new SimpleQuery();
+//        query.setRequestHandler("browse");
+//        for (String keyword1 : Arrays.asList(split)) {
+//            query.addCriteria(new Criteria("productName").boost(10).is(keyword)
+//            .or(new Criteria("description").boost(5).is(keyword))
+//                    .or(new Criteria("genre").boost(7).is(keyword))
+//                    .or(new Criteria("author").boost(8).is(keyword)));
+//
+//        }
+//        return solrTemplate.query("productCollection",query, SearchDocument.class);
+//    }
     @Override
     public Page<SearchDocument> search(String keyword) {
-        String[] split = keyword.split("\\s+");
-        Query query = new SimpleQuery();
-        query.setRequestHandler("browse");
-        for (String keyword1 : Arrays.asList(split)) {
-            query.addCriteria(new Criteria("productName").boost(10).is(keyword)
-            .or(new Criteria("description").boost(5).is(keyword))
-                    .or(new Criteria("genre").boost(7).is(keyword))
-                    .or(new Criteria("author").boost(8).is(keyword)));
-
-        }
-        //OR.(Criteria.where("description").contains(keyword)));
-//        Query query1 = new SimpleQuery(Criteria.where("productId").is(keyword));
-
-//        Query query = new SimpleQuery(Criteria.where("productName").contains(keyword));
-
-//        query.addFilterQuery(new SimpleFilterQuery(Criteria.where("productName").contains(keyword)));
-        return solrTemplate.query("productCollection",query, SearchDocument.class);
-    }
-    @Override
-    public Page<SearchDocument> search2(String keyword) {
         SimpleQuery solrQuery = new SimpleQuery(keyword);
         solrQuery.setRequestHandler("/browse");
        return solrTemplate.query("productCollection",solrQuery,SearchDocument.class);
