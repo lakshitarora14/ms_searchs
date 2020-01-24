@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="productCollection" version="1.5">
+    <uniqueKey>productId</uniqueKey>
+    <fieldType name="binary" class="solr.BinaryField"/>
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <fieldType name="date" class="solr.TrieDateField" positionIncrementGap="0" precisionStep="0"/>
+    <fieldType name="double" class="solr.TrieDoubleField" positionIncrementGap="0" precisionStep="0"/>
+    <fieldType name="float" class="solr.TrieFloatField" positionIncrementGap="0" precisionStep="0"/>
+    <fieldType name="int" class="solr.TrieIntField" positionIncrementGap="0" precisionStep="0" docValues="true"/>
+    <fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" precisionStep="0"/>
+    <fieldType name="tdate" class="solr.TrieDateField" sortMissingLast="true"/>
+    <fieldType name="random" class="solr.RandomSortField" indexed="true"/>
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+    <fieldType name="tfloat" class="solr.TrieFloatField" positionIncrementGap="0" precisionStep="8"/>
+    <fieldType name="tint" class="solr.TrieIntField" positionIncrementGap="0" precisionStep="8"/>
+    <fieldType name="tlong" class="solr.TrieLongField" positionIncrementGap="0" precisionStep="8"/>
+    
+
+
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+    <field name="productId" type="string" indexed="true" stored="true"/>
+    <field name="productName" type="customFieldType" indexed="true" stored="true"/>
+    <field name="description" type="customFieldType" indexed="true" stored="true"/>
+    <field name="genre" type="customFieldType" indexed="true" stored="true"/>
+    <field name="author" type="customFieldType" indexed="true" stored="true"/>
+    <field name="rating" type="customFieldType" indexed="true" stored="true"/>
+    <field name="url" type="string" indexed="true" stored="true"/>
+    <field name="isbn" type="string" indexed="true" stored="true"/>
+    <field name="price" type="string" indexed="true" stored="true"/>
+
+
+
+
+
+    <fieldType name="autocomplete" class="solr.TextField" sortMissingLast="true">
+    	<analyzer type="index">
+    		<tokenizer class="solr.StandardTokenizerFactory"/>
+    			<filter class="solr.LowerCaseFilterFactory"/>
+    			<filter class="solr.EnglishMinimalStemFilterFactory"/>
+    			<filter class="solr.EnglishPossessiveFilterFactory"/>
+    			<filter class="solr.EdgeNGramFilterFactory" minGramSize="1" maxGramSize="15"/>
+    			<filter class="solr.HyphenatedWordsFilterFactory"/>
+    			<filter class="solr.PatternReplaceFilterFactory" pattern="[^\dA-Za-z ]" replacement=""/>
+    	</analyzer>
+    	<analyzer type="query">
+    		<tokenizer class="solr.StandardTokenizerFactory"/>
+    			<filter class="solr.LowerCaseFilterFactory"/>
+    		    <filter class="solr.EnglishMinimalStemFilterFactory"/>
+    		    <filter class="solr.EnglishPossessiveFilterFactory"/>
+    		    <filter class="solr.HyphenatedWordsFilterFactory"/>
+    		    <filter class="solr.PatternReplaceFilterFactory" pattern="[^\dA-Za-z ]" replacement=""/>
+  </analyzer>
+</fieldType>
+
+
+
+
+  <fieldType name="customFieldType" class="solr.TextField" sortMissingLast="true">
+    	<analyzer type="index">
+    		<tokenizer class="solr.StandardTokenizerFactory"/>
+    			<filter class="solr.LowerCaseFilterFactory"/>
+    			<filter class="solr.EnglishMinimalStemFilterFactory"/>
+    			<filter class="solr.EnglishPossessiveFilterFactory"/>
+    			<filter class="solr.HyphenatedWordsFilterFactory"/>
+    			<filter class="solr.PatternReplaceFilterFactory" pattern="[^\dA-Za-z ]" replacement=""/>
+    	</analyzer>
+    	<analyzer type="query">
+    		<tokenizer class="solr.StandardTokenizerFactory"/>
+    			<filter class="solr.LowerCaseFilterFactory"/>
+    		    <filter class="solr.EnglishMinimalStemFilterFactory"/>
+    		    <filter class="solr.EnglishPossessiveFilterFactory"/>
+    		    <filter class="solr.HyphenatedWordsFilterFactory"/>
+    		    <filter class="solr.PatternReplaceFilterFactory" pattern="[^\dA-Za-z ]" replacement=""/>
+  </analyzer>
+</fieldType>
+</schema>

@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.Query;
-import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.stereotype.Repository;
 
@@ -41,6 +40,13 @@ public class SearchRepoCustomImpl implements SearchRepoCustom {
 //        query.addFilterQuery(new SimpleFilterQuery(Criteria.where("productName").contains(keyword)));
         return solrTemplate.query("productCollection",query, SearchDocument.class);
     }
+    @Override
+    public Page<SearchDocument> search2(String keyword) {
+        SimpleQuery solrQuery = new SimpleQuery(keyword);
+        solrQuery.setRequestHandler("/browse");
+       return solrTemplate.query("productCollection",solrQuery,SearchDocument.class);
+    }
+
 
 
 

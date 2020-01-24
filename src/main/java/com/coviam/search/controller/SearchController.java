@@ -30,11 +30,11 @@ public class SearchController {
     SearchRepository searchRepository;
 
 
-
-    @PostMapping("/save")
-    public ResponseEntity<SearchDocument> save(@RequestBody SearchDocument searchDocument) {
-        return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
-    }
+//Save files without Kafka
+//    @PostMapping("/save")
+//    public ResponseEntity<SearchDocument> save(@RequestBody SearchDocument searchDocument) {
+//        return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
+//    }
 
     @KafkaListener(topics = "kafkaAdd",groupId = "group_id")
     public ResponseEntity<SearchDocument> save(String merchantData) throws JsonProcessingException{
@@ -59,6 +59,11 @@ public class SearchController {
 
     }
 
+//    @DeleteMapping("/delete/{id}")
+//    public  void deleteById(@PathVariable(value = "id") String id){
+//            searchService.deleteById(id);
+//    }
+//
 
 
 

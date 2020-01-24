@@ -11,4 +11,6 @@ public interface SearchService {
     Page<SearchDocument> search(String keyword);
 
     List<SearchDocument> findByString(String name);
+
+    void deleteById(String id);
 }
