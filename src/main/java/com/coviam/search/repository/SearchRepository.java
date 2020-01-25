@@ -15,7 +15,7 @@ public interface SearchRepository extends SolrCrudRepository<SearchDocument, Str
 //        @Query("(productName:*?0*)^10 OR (description:*?0*)^5 OR (author:*?0*)^7 OR (isbn:*?0*)")
 
 
-    void deleteByproductId(String id);
+    void deleteByProductId(String id);
 
 
 

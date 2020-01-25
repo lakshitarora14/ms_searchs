@@ -60,8 +60,8 @@ public class SearchController {
 
 
     @DeleteMapping("/delete/{id}")
-    public String deleteByproductId(@PathVariable(value = "id") String productId){
-         searchService.deleteByproductId(productId);
+    public String deleteByProductId(@PathVariable(value = "id") String productId){
+         searchService.deleteByProductId(productId);
          return "Deleted";
     }
 

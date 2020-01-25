@@ -34,8 +34,14 @@ public class SearchServiceImpl implements SearchService {
 //    }
 
     @Override
-    public void deleteByproductId(String productId) {
-        searchRepository.deleteByproductId(productId);
+    public void deleteByProductId(String productId) {
+        try {
+            searchRepository.deleteByProductId(productId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
 
