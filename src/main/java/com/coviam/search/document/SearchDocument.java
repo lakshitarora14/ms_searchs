@@ -2,6 +2,7 @@ package com.coviam.search.document;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
@@ -9,6 +10,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import java.util.HashMap;
 @Getter
 @Setter
+@ToString
 @SolrDocument(collection = "productCollection")
 public class SearchDocument {
 

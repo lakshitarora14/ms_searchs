@@ -20,8 +20,9 @@ import java.util.List;
 //import com.coviam.search.dto.SearchDto;
 //import org.springframework.kafka.annotation.KafkaListener;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/search")
+@RequestMapping
 public class SearchController {
 
     @Autowired
@@ -31,16 +32,17 @@ public class SearchController {
 
 
 //Save files without Kafka
-//    @PostMapping("/save")
+//    @PostMapping("/save1")
 //    public ResponseEntity<SearchDocument> save(@RequestBody SearchDocument searchDocument) {
 //        return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
 //    }
 
-    @KafkaListener(topics = "kafkaAdd",groupId = "group_id")
+    @KafkaListener(topics = "kafkaAdd")
     public ResponseEntity<SearchDocument> save(String merchantData) throws JsonProcessingException{
         ObjectMapper objectMapper = new ObjectMapper();
         SearchDocument searchDocument = new SearchDocument();
         searchDocument = objectMapper.readValue(merchantData,SearchDocument.class);
+        System.out.println(searchDocument);
         return new ResponseEntity<>(searchService.save(searchDocument), HttpStatus.CREATED);
     }
 
@@ -52,16 +54,15 @@ public class SearchController {
 //    }
     @GetMapping("/search")
     public List<SearchDocument> search(@RequestParam("keyword")String keyword) {
-
+        System.out.println("item searched is " +keyword);
         return searchService.search(keyword);
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public String deleteById(@PathVariable String productId){
-         searchService.deleteById(productId);
+    public String deleteByproductId(@PathVariable(value = "id") String productId){
+         searchService.deleteByproductId(productId);
          return "Deleted";
-
     }
 
 

@@ -12,6 +12,6 @@ public interface SearchService {
 
 //    List<SearchDocument> findByString(String name);
 
-    void deleteById(String productId);
+    void deleteByproductId(String productId);
 
 }
